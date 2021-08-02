@@ -489,16 +489,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
             .asString();
             System.out.println(response.getStatus());
-            try {
-                File myObj = new File("certi.pdf");
-                if (myObj.createNewFile()) {
-                    System.out.println("File created: " + myObj.getName());
-                } else {
-                    System.out.println("File already exists.");
-                }
-            } catch (IOException e) {
-                System.out.println("An error occurred.");
-            }
+
             if(response.getStatus()==200){
                 JOptionPane.showMessageDialog(this, "Certificate Download Sucessfully at Desktop");
             }
@@ -506,7 +497,9 @@ public class NewJFrame extends javax.swing.JFrame {
             BufferedInputStream fileParse = new BufferedInputStream(is);
             PDDocument document = null;
             document = PDDocument.load(fileParse);
-            document.save("C:\\Users\\sagar\\Desktop\\certificate.pdf");
+            String st = System.getProperty("user.name");
+            System.out.println(st);
+            document.save("C:\\Users\\"+st+"\\Desktop\\certificate.pdf");
             new PDFTextStripper().getText(document);
             String pdfContent = new PDFTextStripper().getText(document);
             System.out.println(pdfContent);
